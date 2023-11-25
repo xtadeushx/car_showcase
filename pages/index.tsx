@@ -1,7 +1,12 @@
 import { Hero, SearchBar } from '@/components'
+import { fetchCars } from '@/utils'
 
 
-export default function Home() {
+export default async function Home() {
+  const allCars = await fetchCars();
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || allCars;
+
+  console.log('allCars');
   return (
     <main
       className="overflow-hidden"
@@ -21,6 +26,16 @@ export default function Home() {
           {/* <CustomFilter title="fuel" />
           <CustomFilter title="year" /> */}
         </div>
+        {isDataEmpty ? (
+          <section>
+            WE HAVE CARS
+          </section>
+        ) : (
+          <div className='home__error-container'>
+            <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
+            <p>{allCars?.message}</p>
+          </div>)
+        }
       </div>
     </main>
   )
