@@ -1,4 +1,4 @@
-import { Hero } from '@/components'
+import { Hero, SearchBar } from '@/components'
 
 
 export default function Home() {
@@ -18,8 +18,8 @@ export default function Home() {
         <SearchBar />
 
         <div className="home__filter-container">
-          <CustomFilter title="fuel" />
-          <CustomFilter title="year" />
+          {/* <CustomFilter title="fuel" />
+          <CustomFilter title="year" /> */}
         </div>
       </div>
     </main>
