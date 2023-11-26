@@ -35,7 +35,6 @@ const SearchBar = () => {
 
   const updateSearchParams = (model: string, manufacturers: string) => {
     const searchParams = new URLSearchParams(window.location.search);
-    console.log(window.location.search);
     if (model) {
       searchParams.set('model', model);
     } else {
@@ -48,11 +47,6 @@ const SearchBar = () => {
       searchParams.delete('manufacturers')
     }
 
-    if (color) {
-      searchParams.set('color', color);
-    } else {
-      searchParams.delete('color')
-    }
     const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
     router.push(newPathName);
   };
