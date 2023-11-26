@@ -10,8 +10,6 @@ export interface Car {
     highway_mpg: number
     make: string
     model: string
-    transmission: 'manual' | 'automatic'
+    transmission: 'm' | 'a'
     year: number
-
-
 }
