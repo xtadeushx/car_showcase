@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SearchManufacturer from "./SearchManufacturer";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 interface SearchBarProps {
   otherClasses: string
 }
@@ -21,8 +22,41 @@ const SearchButton = ({ otherClasses }: SearchBarProps) => (
 
 const SearchBar = () => {
   const [manufacturer, setManufacturer] = useState('');
-  const [model, setModel] = useState('')
-  const handleSearch = () => { };
+  const [model, setModel] = useState('');
+  const [color, setColor] = useState('');
+  const router = useRouter();
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (manufacturer === "" && model === "") {
+      alert("Please enter a manufacturer or model");
+    };
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+  };
+
+  const updateSearchParams = (model: string, manufacturers: string) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    console.log(window.location.search);
+    if (model) {
+      searchParams.set('model', model);
+    } else {
+      searchParams.delete('model');
+    }
+
+    if (manufacturers) {
+      searchParams.set('manufacturers', manufacturers);
+    } else {
+      searchParams.delete('manufacturers')
+    }
+
+    if (color) {
+      searchParams.set('color', color);
+    } else {
+      searchParams.delete('color')
+    }
+    const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
+    router.push(newPathName);
+  };
+
   return (
     <form className='searchbar' onSubmit={handleSearch}>
       <div className="searchbar__item">
@@ -45,9 +79,14 @@ const SearchBar = () => {
           name="modal"
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          placeholder='Tiguane'
+          placeholder='Tiguan'
+          className="searchbar__input"
         />
+        <SearchButton otherClasses="sm:hidden" />
       </div>
+
+      <SearchButton otherClasses="max-sm:hidden" />
+
     </form>
   )
 }
