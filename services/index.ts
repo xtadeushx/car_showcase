@@ -1,7 +1,8 @@
 import {fetchCars} from './fetchCars';
-
+import { generateCarImageUrl } from './generateCarImageUrl';
 
 
 export {
-    fetchCars
+    fetchCars,
+    generateCarImageUrl
 }; 
