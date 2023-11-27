@@ -1,7 +1,7 @@
-import { CarCard, Hero, SearchBar } from '@/components'
+import { CarCard, CustomFilter, Hero, SearchBar } from '@/components'
 import { fetchCars } from '@/services';
 import { v4 as uuidv4 } from 'uuid';
-import { manufacturers } from '../constants/constants';
+import { fuels, manufacturers, yearsOfProduction } from '../constants/constants';
 import { fetchCarsProps } from '@/services/fetchCars';
 
 interface HomeProps {
@@ -33,8 +33,8 @@ export default async function Home({ searchParams }: HomeProps) {
         <SearchBar />
 
         <div className="home__filter-container">
-          {/* <CustomFilter title="fuel" /> */}
-          {/* <CustomFilter title="year" /> */}
+          <CustomFilter title="fuel" options={fuels} />
+          <CustomFilter title="year" options={yearsOfProduction} />
         </div>
         {!isDataEmpty ? (
           <section>
